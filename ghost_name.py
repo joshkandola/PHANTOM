@@ -1,5 +1,5 @@
 import webapp2
-
+import random
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
@@ -9,7 +9,8 @@ class MainPage(webapp2.RequestHandler):
             <head><title>Enter your name...</title></head>
             <body>
               <form action="/welcome" method="post">
-                <input type="text" name="my_name"><br>
+                <input type="text" first name="my_first_name"><br>
+                <input type="text" last name="my_last_name"><br>
                 <input type="submit" value="Sign In">
               </form>
             </body>
@@ -19,8 +20,11 @@ class MainPage(webapp2.RequestHandler):
 class Greeting(webapp2.RequestHandler):
     def post(self):
         a=["a","b","c"]
-        username = self.request.get("my_name")
-        ghostName= username+a[0]
+        x=random.randint(0,len(a))
+        firstName = self.request.get("my_first_name")
+        lastName = self.request.get("my_last_name")
+        ghostName= firstName+a[x]+lastName
+        a.pop(x)
         welcome_string = """<html><body>
                           Hi there, {}!
                           </body></html>""".format(ghostName)
